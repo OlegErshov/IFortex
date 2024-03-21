@@ -16,7 +16,7 @@ namespace TestTask.Repositories.Implementations
 
         public async Task<Order> GetOrderWithMaxSumAsync()
         {
-            var orders = _context.Orders.AsQueryable();
+            var orders = _context.Orders.AsNoTracking().AsQueryable();
             var maxSum = orders.Max(o => o.Quantity * o.Price);
             orders = orders.Where(o => o.Quantity * o.Price == maxSum);
             return await orders.FirstOrDefaultAsync();
@@ -24,7 +24,7 @@ namespace TestTask.Repositories.Implementations
 
         public async Task<List<Order>> GetOrdersListAsync(Expression<Func<Order, bool>> filter)
         {
-            return await _context.Orders.Where(filter).ToListAsync();
+            return await _context.Orders.Where(filter).AsNoTracking().ToListAsync();
         }
     }
 }

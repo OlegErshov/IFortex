@@ -14,7 +14,7 @@ namespace TestTask.Repositories.Implementations
         }
         public async Task<User> GetUserWithMaxOrdersAsync()
         {
-            var users =  await _context.Users.Include(u => u.Orders).ToListAsync();
+            var users =  await _context.Users.Include(u => u.Orders).AsNoTracking().ToListAsync();
             var maxUser = users.Max(u => u.Orders.Count);
             var user = users.FirstOrDefault(x => x.Orders.Count == maxUser);
             return user;
@@ -22,7 +22,7 @@ namespace TestTask.Repositories.Implementations
 
         public async Task<List<User>> GetUsersAsync(Expression<Func<User, bool>> filter)
         {
-            return await _context.Users.Where(filter).ToListAsync();
+            return await _context.Users.Where(filter).AsNoTracking().ToListAsync();
         }
     }
 }
