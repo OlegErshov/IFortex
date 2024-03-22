@@ -21,7 +21,7 @@ namespace TestTask.Services.Implementations
 
         public async Task<List<User>> GetUsers()
         {
-            return await _userRepositoty.GetUsersAsync(u => u.Status == UserStatus.Active);
+            return await _userRepositoty.GetUsersAsync(u => u.Status == UserStatus.Inactive);
         }
     }
 }

@@ -24,8 +24,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services
     .AddScoped<IOrderRepository,OrderRepository>()
     .AddScoped<IUserRepositoty,UserRepository>()
-    .AddScoped<IOrderService, OrderService>()
-    .AddScoped<IUserService, UserService>();
+    .AddTransient<IOrderService, OrderService>()
+    .AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 
